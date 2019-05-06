@@ -2,17 +2,135 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>txGenerator 1.0</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </head>
-  <body>
-    <h1>Hello World!</h1>
+  <body style="background-color: gray;">
+    <!-- <h1>Hello World!</h1> -->
     <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <!-- We are using Node.js <script>document.write(process.versions.node)</script>, -->
+    <!-- Chromium <script>document.write(process.versions.chrome)</script>, -->
+    <!-- and Electron <script>document.write(process.versions.electron)</script>. -->
+    <div class="pt-2 pl-5 pr-5">
+      <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
+        <strong>Warning!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class = "row mt-3">
+        <div class = "col-md-3">
+          <span style="color:white;">Sender Address : </span>
+        </div>
+        <div class = "col-md-9">
+          <input type="text" style="width: 100%" />
+        </div>
+      </div>
+
+      <div class = "row mt-2">
+        <div class = "col-md-3">
+            <span style="color:white;">Receiver Address : </span>
+        </div>
+        <div class = "col-md-9">
+          <input type="text" style="width: 100%" />
+        </div>
+      </div>
+      
+      <div class = "row mt-2">
+        <div class = "col-md-3">
+            <span style="color:white;"> Sending Amount : </span>
+        </div>
+        <div class = "col-md-9">
+          <input type="text" style="width: 100%" />
+        </div>
+      </div>
+
+      <div class = "row mt-4">
+        <!-- controllers -->
+        <div class = "col-md-4 text-center">
+          <button type="button" class="btn btn-secondary">Generate Transaction</button>
+        </div>
+        <div class = "col-md-4 text-center">
+          <button type="button" class="btn btn-secondary">Broadcast Transaction</button>
+        </div>
+        <div class = "col-md-4 text-center">
+          <button type="button" class="btn btn-secondary">Clear Terminal Log</button>
+        </div>
+      </div>
+
+      <div class = "row mt-4">
+        <div class="col-md-12">
+          <span style="color:white;">Terminal</span>
+          <div id="terminal"></div>
+        </div>
+      </div>
+
+    </div>
 
     <script>
-      // You can also require other files to run in this process
+
+      $( document ).ready(function() {
+        // /starts a new line |delays
+        var string = ">BOOT SEQUENCE INITIALISING.|..|...|....|...../>STARTUP OK./>Welcome, user./>Please adjust.|";
+        
+        var fString = "";
+        var progress = 0; 
+        var badString= "";
+        var blinker = false; 
+          
+        var goMad = function(){ 
+          badString="";
+          var count = 0;
+          while(badString.length<1350){
+              badString+= Math.floor(Math.random()*10);
+            count++;
+          }   
+          $('#terminal').text(badString);
+          setTimeout(function(){
+            $('body').css('background-color','black');
+            $('#terminal').text("");
+            $('#terminal').css('padding','0').css('-webkit-animation','off 1s forwards');
+          },2000);  
+        } 
+            
+        
+          blink = function(){
+            blinker?$('#terminal').html(fString):$('#terminal').html(fString+"_")
+            blinker=!blinker;
+        }; 
+        
+        var pause = function(){
+          var setBlink = setInterval(function(){blink();}, 500);
+          setTimeout(function(){type(); clearInterval(setBlink);}, 1000);
+        };
+        
+        var type = function(){
+          if(progress<string.length){
+          var next = string.substring(progress,progress+1);
+          switch(next){
+            case "|": pause(); break;
+            case "/": fString+="<p>"; setTimeout(function(){type()},100);  break;
+            default: fString+=next;
+              $('#terminal').html(fString+"_"); 
+              setTimeout(function(){type()}, 50 + Math.random()*100); 
+              break;
+            }
+          progress++;
+          }
+          //else{setInterval(function(){blink();}, 500);}
+          else{setInterval(function(){goMad();},50);}
+        };  
+        
+        type(); 
+
+      });
+
       require('./renderer.js')
     </script>
   </body>

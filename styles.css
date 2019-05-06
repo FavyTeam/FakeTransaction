@@ -1,0 +1,51 @@
+#terminal {  
+    margin-top : 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #00ff1e;
+    font-family: Inconsolata, monospace;
+    height: 300px;
+    width: 90%;
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px black;
+    line-height: 15px;
+    word-wrap: break-word;
+    text-shadow: 0 0 5px #00ff1e;
+    overflow: hidden;
+    -webkit-animation-fill-mode: forwards;
+  }
+  
+  @-webkit-keyframes off {
+    10% {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    20% {
+      width: 500px;
+      height: 1px;
+      top: 198px;
+      left: 0;
+    }
+    50% {
+      width: 10px;
+      height: 10px;
+      top: 198px;
+      left: 245px;
+      box-shadow: 0 0 10px white;
+      background-color: white;
+    }
+    98% {
+      width: 10px;
+      height: 10px;
+    }
+    100% {
+      top: 198px;
+      width: 0;
+      height: 0;
+      left: 245px;
+    }
+  }
+  
