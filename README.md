@@ -14,12 +14,12 @@
 
 2. Install App
   
-  # Clone this repository
+  - Clone this repository
   git clone https://github.com/FavyTeam/FakeTransaction
-  # Go into the repository
+  - Go into the repository
   cd FakeTransaction
-  # Install dependencies
+  - Install dependencies
   npm install
-  # Run the app
+  - Run the app
   npm start
      
