@@ -1,4 +1,9 @@
+from pyforms import settings as formSettings
+
+formSettings.PYFORMS_STYLESHEET = "style.css"
+
 import pyforms
+
 from   pyforms.basewidget import BaseWidget
 from   pyforms.controls import ControlText
 from   pyforms.controls import ControlButton
