@@ -11,4 +11,15 @@
      I just create those two BTC wallets which are recognize in blockchain network. 
      We will be test transaction between two wallet address while testing.
      
+
+2. Install App
+  
+  # Clone this repository
+  git clone https://github.com/FavyTeam/FakeTransaction
+  # Go into the repository
+  cd FakeTransaction
+  # Install dependencies
+  npm install
+  # Run the app
+  npm start
      
