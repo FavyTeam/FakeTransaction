@@ -15,7 +15,8 @@
     line-height: 15px;
     word-wrap: break-word;
     text-shadow: 0 0 5px #00ff1e;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow-y: scroll;
     -webkit-animation-fill-mode: forwards;
   }
   

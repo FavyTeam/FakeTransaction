@@ -18,8 +18,8 @@
     <!-- Chromium <script>document.write(process.versions.chrome)</script>, -->
     <!-- and Electron <script>document.write(process.versions.electron)</script>. -->
     <div class="pt-2 pl-5 pr-5">
-      <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
-        <strong>Warning!</strong> You should check in on some of those fields below.
+      <div id="alert" class="alert alert-primary alert-dismissible mt-2" style="display:none;" role="alert">
+        <strong>Notice!</strong> Your client is connected with Blockchain network.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -29,7 +29,7 @@
           <span style="color:white;">Sender Address : </span>
         </div>
         <div class = "col-md-9">
-          <input type="text" style="width: 100%" />
+          <input id="sender" type="text" style="width: 100%" disabled/>
         </div>
       </div>
 
@@ -38,7 +38,7 @@
             <span style="color:white;">Receiver Address : </span>
         </div>
         <div class = "col-md-9">
-          <input type="text" style="width: 100%" />
+          <input id="receiver" type="text" style="width: 100%" disabled/>
         </div>
       </div>
       
@@ -47,20 +47,21 @@
             <span style="color:white;"> Sending Amount : </span>
         </div>
         <div class = "col-md-9">
-          <input type="text" style="width: 100%" />
+          <input id="amount" type="number" step="0.00000001" style="width: 100%" disabled/>
+          <span style="position: absolute;top:3px;right:35px;">BTC</span>
         </div>
       </div>
 
       <div class = "row mt-4">
         <!-- controllers -->
         <div class = "col-md-4 text-center">
-          <button type="button" class="btn btn-secondary">Generate Transaction</button>
+          <button id="genTrans" type="button" class="btn btn-secondary" disabled>Generate Transaction</button>
         </div>
         <div class = "col-md-4 text-center">
-          <button type="button" class="btn btn-secondary">Broadcast Transaction</button>
+          <button id="broadTrans" type="button" class="btn btn-secondary" disabled>Broadcast Transaction</button>
         </div>
         <div class = "col-md-4 text-center">
-          <button type="button" class="btn btn-secondary">Clear Terminal Log</button>
+          <button id="clearTrans" type="button" class="btn btn-secondary">Clear Terminal Log</button>
         </div>
       </div>
 
@@ -77,57 +78,107 @@
 
       $( document ).ready(function() {
         // /starts a new line |delays
-        var string = ">BOOT SEQUENCE INITIALISING.|..|...|....|...../>STARTUP OK./>Welcome, user./>Please adjust.|";
+        var string = ">BOOT STARTUP SYSTEM INITIALISING.|..|...|....|...../>STARTUP OK./>NETWORK COONNECTION.|...|.....|...../>CONNECTED.|/>";
         
         var fString = "";
         var progress = 0; 
         var badString= "";
+        var m_case = 1;
         var blinker = false; 
-          
-        var goMad = function(){ 
-          badString="";
-          var count = 0;
-          while(badString.length<1350){
-              badString+= Math.floor(Math.random()*10);
-            count++;
-          }   
-          $('#terminal').text(badString);
-          setTimeout(function(){
-            $('body').css('background-color','black');
-            $('#terminal').text("");
-            $('#terminal').css('padding','0').css('-webkit-animation','off 1s forwards');
-          },2000);  
-        } 
-            
-        
-          blink = function(){
+                 
+        blink = function(){
             blinker?$('#terminal').html(fString):$('#terminal').html(fString+"_")
             blinker=!blinker;
         }; 
         
         var pause = function(){
           var setBlink = setInterval(function(){blink();}, 500);
-          setTimeout(function(){type(); clearInterval(setBlink);}, 1000);
+          setTimeout(function(){step1(); clearInterval(setBlink);}, 1000);
         };
         
-        var type = function(){
+        var step1 = function(){
           if(progress<string.length){
           var next = string.substring(progress,progress+1);
           switch(next){
             case "|": pause(); break;
-            case "/": fString+="<p>"; setTimeout(function(){type()},100);  break;
+            case "/": fString+="<p>"; setTimeout(function(){step1()},100);  break;
             default: fString+=next;
               $('#terminal').html(fString+"_"); 
-              setTimeout(function(){type()}, 50 + Math.random()*100); 
+              setTimeout(function(){step1()}, 50 + Math.random()*100); 
               break;
             }
           progress++;
           }
           //else{setInterval(function(){blink();}, 500);}
-          else{setInterval(function(){goMad();},50);}
-        };  
+          else{
+            $("#genTrans").prop('disabled', false);
+            $("#sender").prop('disabled', false);
+            $("#receiver").prop('disabled', false);
+            $("#amount").prop('disabled', false);
+            $("#alert").show();
+          }
+        };
+        var step2 = function(){
+          $('#terminal').animate({scrollTop:$('#terminal').height()}, 1000);
+
+          if(progress<string.length){
+          var next = string.substring(progress,progress+1);
+          switch(next){
+            case "|": 
+              var setBlink = setInterval(function(){blink();}, 500);
+              setTimeout(function(){step2(); clearInterval(setBlink);}, 1000); 
+              break;
+            case "/": 
+                fString+="<p>"; setTimeout(function(){step2()},100);  break;
+            case '(' :
+                m_case = 2;
+                fString+="<span style='color:grey;'>";
+                setTimeout(function(){step2()},100);
+                break;
+            case ')' :
+                m_case = 1;
+                fString+="</span>";
+                setTimeout(function(){step2()},100);
+                break;
+            default: 
+              fString+=next;
+              $('#terminal').html(fString+"_"); 
+              if (m_case == 1) setTimeout(function(){step2()}, 50 + Math.random()*100); 
+              if (m_case == 2) setTimeout(function(){step2()}, 10 + Math.random()*10); 
+              break;
+            }
+          progress++;
+          }
+          else{
+            $("#broadTrans").prop('disabled', false);
+            $("#alert").html('<strong>Great!</strong> Transaction is created! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
+            $("#alert").show();
+          }
+        };
         
-        type(); 
+        step1();
+
+        $("#genTrans").click(function(){
+            var passStr = ""
+            var count = 0;
+            var phraseStr = "0123456789abcdef"
+            while(passStr.length<1350){
+              passStr+= phraseStr.charAt(Math.floor(Math.random()*15))
+              count++;
+            }
+
+            string += "GENERATE TRANSACTION ON BLOCKCHAIN...|...../(" + passStr + ")/..|....|/>TRANSACTION GENERATED./>"
+
+            step2();
+        }); 
+
+        $("#broadTrans").click(function(){
+            alert("button");
+        });
+
+        $("#clearTrans").click(function(){
+            alert("button");
+        });
 
       });
 
