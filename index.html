@@ -78,13 +78,14 @@
 
       $( document ).ready(function() {
         // /starts a new line |delays
-        var string = ">BOOT STARTUP SYSTEM INITIALISING.|..|...|....|...../>STARTUP OK./>NETWORK COONNECTION.|...|.....|...../>CONNECTED.|/>";
+        var string = ">BOOT STARTUP SYSTEM INITIALISING.|..|...|....|...../>STARTUP OK./>NETWORK COONNECTION.|...|.....|.....GOOD./>CONNECTED.|/>";
         
         var fString = "";
         var progress = 0; 
         var badString= "";
         var m_case = 1;
-        var blinker = false; 
+        var blinker = false;
+        var tx_id = "010000000175f47f33c814a43bd048368e7f973e42d1fb891f19a9c98fe9c93f263e276670010000006b483045022100ea5eff44ad226e1935c9efebf6e5261564c88611ec4a034d1c75a901fc5c71c302200ee0c48f9c63898c5b8f2937564a11e60f880d1fa3f5644ee39af85c62dcc534012103b80c696a1f6b8e5efbd56f778e5a92220bac1eca86f9e77ce21173fbc1d6f616ffffffff0210270000000000001976a91499bc78ba577a95a11f1a344d4d2ae55f2f857b9888ac24237200000000001976a914c3e35358a793f10cc8465dd64c28ca2fd79b4df188ac00000000"
                  
         blink = function(){
             blinker?$('#terminal').html(fString):$('#terminal').html(fString+"_")
@@ -151,7 +152,7 @@
           }
           else{
             $("#broadTrans").prop('disabled', false);
-            $("#alert").html('<strong>Great!</strong> Transaction is created! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
+            $("#alert").html('<strong>Great!</strong> Transaction is created! <br><span><div style="width:100%;word-wrap:break-word;display:block"> tx : ' + tx_id +'</div></span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
             $("#alert").show();
           }
         };
@@ -167,13 +168,13 @@
               count++;
             }
 
-            string += "GENERATE TRANSACTION ON BLOCKCHAIN...|...../(" + passStr + ")/..|....|/>TRANSACTION GENERATED./>"
+            string += "GENERATE TRANSACTION ON BLOCKCHAIN...|...../(" + passStr + ")/..|....|/>TRANSACTION GENERATED./>...Ready to Broadcast!/>"
 
             step2();
         }); 
 
         $("#broadTrans").click(function(){
-            alert("button");
+            alert("Failed to broadcast transaction!");
         });
 
         $("#clearTrans").click(function(){
