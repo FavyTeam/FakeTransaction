@@ -13,7 +13,9 @@
      
 ## Watch Video
 
-   [![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://youtu.be/UdE2hRUr1Dc)
+   <div style="text-align : center;">
+      [![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://youtu.be/UdE2hRUr1Dc)
+   </div>
 
 2. Install App
   
