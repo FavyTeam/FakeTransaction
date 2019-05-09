@@ -15,7 +15,7 @@
 
    [![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://youtu.be/UdE2hRUr1Dc)
 
-3. Install App
+2. Install App
   
   ```bash
   # Clone this repository
