@@ -12,7 +12,7 @@
      We will be test transaction between two wallet address while testing.
      
 ## Watch Video
-      [![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://www.youtube.com/watch?v=UdE2hRUr1Dc&t=39s)
+[![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://www.youtube.com/watch?v=UdE2hRUr1Dc&t=39s)
 
 2. Install App
   
