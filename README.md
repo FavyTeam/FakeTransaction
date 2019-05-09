@@ -13,9 +13,7 @@
      
 ## Watch Video
 
-   <div style="text-align : center;">
-      [![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://youtu.be/UdE2hRUr1Dc)
-   </div>
+      [![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://youtu.be/UdE2hRUr1Dc){.callout}
 
 2. Install App
   
@@ -29,6 +27,10 @@
   # Run the app
   npm start
   ```
+  
+.callout {
+    float: right;
+}
 
   
      
