@@ -13,7 +13,7 @@
      
 ## Watch Video
 
-      [![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://youtu.be/UdE2hRUr1Dc){.callout}
+      [![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://youtu.be/UdE2hRUr1Dc)
 
 2. Install App
   
@@ -27,10 +27,5 @@
   # Run the app
   npm start
   ```
-  
-.callout {
-    float: right;
-}
-
   
      
