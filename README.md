@@ -11,9 +11,6 @@
      I just create those two BTC wallets which are recognize in blockchain network. 
      We will be test transaction between two wallet address while testing.
      
-## Watch Video
-[![Watch the video](https://i.imgur.com/2mx556l.pngl)](https://www.youtube.com/watch?v=UdE2hRUr1Dc&t=39s)
-
 2. Install App
   
   ```bash
